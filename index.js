@@ -12,12 +12,13 @@ const searchAlbums = (artist) => {
 
         // Columna
         let col = document.createElement('div');
-        col.classList.add('col-md-8', 'mb-4', 'pr-md-4'); 
+        col.classList.add('col-md-4', 'mb-4', 'pr-md-4'); 
 
         //Tarjeta
         let card = document.createElement('div');
         card.classList.add("card");
-        card.style.width = "150px"; 
+        card.style.width = "100%"; 
+        card.style.padding= "10%";
 
         //Nombre del Albúm
         let cardTitle = document.createElement('h5');
@@ -45,6 +46,7 @@ const searchAlbums = (artist) => {
         let botonAgregar = document.createElement('button');
         botonAgregar.classList.add("btn","btn-success");
         botonAgregar.innerText = 'Agregar a la Lista';  
+        botonAgregar.style.width= '100%'
         botonAgregar.addEventListener('click', (e) => {
             e.preventDefault();
    
