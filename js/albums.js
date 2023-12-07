@@ -1,5 +1,8 @@
 
+import { elementoMasRepetido } from "./lists";
+
 albums = document.getElementById('contenedorAlbumes')
+
 lista = []
 
 const searchAlbums = (artist) => {
@@ -12,7 +15,7 @@ const searchAlbums = (artist) => {
 
         // Columna
         let col = document.createElement('div');
-        col.classList.add('col-md-4', 'mb-4', 'pr-md-4'); 
+        col.classList.add('col-md-2', 'mb-4', 'pr-md-4'); 
 
         //Tarjeta
         let card = document.createElement('div');
@@ -67,32 +70,3 @@ const searchAlbums = (artist) => {
       console.error('Hubo un problema con la solicitud:', error);
     });
 }
-
-searchAlbums('Porcupine Tree');
-
-function elementoMasRepetido(lista) {
-    let conteo = {};
-  
-    lista.forEach((elemento) => {
-      if (conteo[elemento]) {
-        conteo[elemento]++;
-      } else {
-        conteo[elemento] = 1;
-      }
-    });
-  
-    let elementoMasRepetido;
-    let maxRepeticiones = 0;
-  
-    // Encontrar el elemento con más repeticiones
-    for (let elemento in conteo) {
-      if (conteo[elemento] > maxRepeticiones) {
-        maxRepeticiones = conteo[elemento];
-        elementoMasRepetido = elemento;
-      }
-    }
-  
-    return elementoMasRepetido;
-  }
-  
-
