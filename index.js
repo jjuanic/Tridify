@@ -18,7 +18,7 @@ const searchAlbums = (artist) => {
         let card = document.createElement('div');
         card.classList.add("card");
         card.style.width = "100%"; 
-        card.style.padding= "10%";
+        card.style.padding= "5%";
 
         //Nombre del Albúm
         let cardTitle = document.createElement('h5');
