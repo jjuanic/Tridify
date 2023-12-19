@@ -22,7 +22,7 @@ export const searchAlbums = (artist) => {
 
       json.forEach((album) => {
         // Contador para saber cuantos albumes iguales se agregan
-        let clicks = 0;
+        let clickAlbum = 0;
 
         // Columna
         let col = document.createElement("div");
@@ -90,10 +90,10 @@ export const searchAlbums = (artist) => {
         botonAgregar.addEventListener("click", (e) => {
           e.preventDefault();
           // aumentamos el contador
-          clicks = clicks + 1;
+          clickAlbum = clickAlbum + 1;
           cantidad = cantidad + 1;
           total = total + album.collectionPrice;
-          precio.innerText=`Precio: $${total.toFixed(2)}`
+          precio.innerText=`Precio: $${Math.abs(total).toFixed(2)}`
 
           //actualizamos la cantidad del carrito
           cont.innerHTML=cantidad;
@@ -158,16 +158,18 @@ export const searchAlbums = (artist) => {
 
           botonEliminar.addEventListener("click", (e) => {
             e.preventDefault();
-            clicks = clicks - 1;
-            cantidad = cantidad - 1;
-            total = total - album.collectionPrice;;
-            precio.innerText=`Precio: $${total.toFixed(2)}`
-            console.log(total);
 
-            // actualizamos la cantidadd del carrito
+            // actualizamos los contadores, individual y total
+            clickAlbum = clickAlbum - 1;
+            cantidad = cantidad - 1;
+
+            // actualizamos precio total
+            total = total - album.collectionPrice;;
+            precio.innerText=`Precio: $${Math.abs(total).toFixed(2)}`
+
+            // actualizamos la cantidad del carrito
             cont.innerHTML=cantidad
             
-
 
             // Buscamos el índice del álbum en el carrito
             const index = carrito.findIndex(
@@ -188,7 +190,7 @@ export const searchAlbums = (artist) => {
               localStorage.setItem("carrito", JSON.stringify(carrito));
 
               // Si tenemos más de un album igual, no eliminamos el botón de eliminar
-              if (clicks == 0) {
+              if (clickAlbum == 0) {
                 card.removeChild(botonEliminar);
               }
 
@@ -237,7 +239,7 @@ export const searchAlbums = (artist) => {
           });
 
           // si tenemos un álbum agregado, agregamos el botón de eliminar
-          if (clicks == 1) {
+          if (clickAlbum == 1) {
             card.appendChild(botonEliminar);
           }
         });
