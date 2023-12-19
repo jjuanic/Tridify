@@ -1,7 +1,6 @@
 import { notificarRemove, notificarSuccess } from "./notificaciones.js";
 
 const albums = document.getElementById("contenedorAlbumes");
-const notificaciones = document.getElementById("notificaciones");
 const contador = document.getElementById("elemCarrito");
 const precio = document.getElementById("precio");
 let cont = document.createElement("p");
