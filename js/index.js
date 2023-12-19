@@ -164,7 +164,7 @@ const searchAlbums = (artist) => {
 
               // texto
               var strongElement = document.createElement('strong');
-              strongElement.appendChild(document.createTextNode('Albúm elimiado del carrito: '));
+              strongElement.appendChild(document.createTextNode('Albúm elimiando del carrito: '));
 
               // nombre del album
               var textNode = document.createTextNode(nombreAlbum);
