@@ -10,6 +10,7 @@ const searchAlbums = (artist) => {
     .then(data => {
       const json = data.results;
       json.forEach(album => {
+        let clicks = 0;
 
         // Columna
         let col = document.createElement('div');
@@ -66,6 +67,7 @@ const searchAlbums = (artist) => {
         botonAgregar.style.width = '100%'
         botonAgregar.addEventListener('click', (e) => {
           e.preventDefault();
+          clicks = clicks + 1;
 
           carrito.push(album);
 
@@ -110,6 +112,7 @@ const searchAlbums = (artist) => {
 
           botonEliminar.addEventListener('click', (e) => {
             e.preventDefault();
+            clicks = clicks - 1;
 
             // Encuentra el índice del álbum en el carrito
             const index = carrito.findIndex(item => item.collectionId === album.collectionId);
@@ -129,7 +132,8 @@ const searchAlbums = (artist) => {
               // Actualiza el carrito en localStorage
               localStorage.setItem('carrito', JSON.stringify(carrito));
 
-              card.removeChild(botonEliminar)
+              if (clicks == 0){
+              card.removeChild(botonEliminar)}
 
               // Crear el elemento div principal
               var alertDiv = document.createElement('div');
@@ -158,8 +162,9 @@ const searchAlbums = (artist) => {
 
             }
           });
-          card.appendChild(botonEliminar)
 
+          if (clicks == 1){
+          card.appendChild(botonEliminar)}
         })
 
         card.appendChild(botonAgregar)
