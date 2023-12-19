@@ -1,6 +1,15 @@
 const albums = document.getElementById("contenedorAlbumes");
 const notificaciones = document.getElementById("notificaciones");
+const contador = document.getElementById("elemCarrito");
+const precio = document.getElementById("precio");
+let cont = document.createElement("p");
+cont.innerHTML =0;
+contador.appendChild(cont);
 let carrito = [];
+let total = 0;
+
+
+
 
 export const searchAlbums = (artist) => {
   const url = `https://itunes.apple.com/search?term=${artist}&entity=album&sort=popular&limit=57`;
@@ -8,6 +17,9 @@ export const searchAlbums = (artist) => {
     .then((response) => response.json())
     .then((data) => {
       const json = data.results;
+
+      let cantidad = 0;
+
       json.forEach((album) => {
         // Contador para saber cuantos albumes iguales se agregan
         let clicks = 0;
@@ -36,7 +48,10 @@ export const searchAlbums = (artist) => {
         //Imagén del Albúm
         let img = document.createElement("img");
         img.classList.add("card-img-top");
-        const biggerImg = album.artworkUrl100.replace("100x100bb", "1200x1200bb");
+        const biggerImg = album.artworkUrl100.replace(
+          "100x100bb",
+          "1200x1200bb"
+        );
         img.src = biggerImg;
         img.alt = "album cover";
 
@@ -76,6 +91,13 @@ export const searchAlbums = (artist) => {
           e.preventDefault();
           // aumentamos el contador
           clicks = clicks + 1;
+          cantidad = cantidad + 1;
+          total = total + album.collectionPrice;
+          precio.innerText=`Precio: $${total.toFixed(2)}`
+
+          //actualizamos la cantidad del carrito
+          cont.innerHTML=cantidad;
+          
 
           carrito.push(album);
 
@@ -116,16 +138,16 @@ export const searchAlbums = (artist) => {
           alertDiv.appendChild(strongElement);
           alertDiv.appendChild(document.createTextNode(textNode.textContent));
 
-          // agarramos todas las notificaciones
-          const notificacionesActuales =
-            notificaciones.querySelectorAll(".alert-dismissible");
-          if (notificacionesActuales.length >= 10) {
-            // Si hay 10 o más notificaciones, elimina la más antigua
-            notificaciones.removeChild(notificacionesActuales[0]);
-          }
-
           // Agregar a el div de notificaciones
           notificaciones.appendChild(alertDiv);
+
+            Swal.fire({
+              icon: 'success',
+              title: 'Álbum agregado',
+              text: `Álbum ${nombreAlbum} agregado al carrito.`,
+              showConfirmButton: false,
+              timer: 1800 // Duración en milisegundos
+            });
 
           // Boton Eliminar
           let botonEliminar = document.createElement("button");
@@ -137,6 +159,15 @@ export const searchAlbums = (artist) => {
           botonEliminar.addEventListener("click", (e) => {
             e.preventDefault();
             clicks = clicks - 1;
+            cantidad = cantidad - 1;
+            total = total - album.collectionPrice;;
+            precio.innerText=`Precio: $${total.toFixed(2)}`
+            console.log(total);
+
+            // actualizamos la cantidadd del carrito
+            cont.innerHTML=cantidad
+            
+
 
             // Buscamos el índice del álbum en el carrito
             const index = carrito.findIndex(
@@ -149,8 +180,6 @@ export const searchAlbums = (artist) => {
 
               let nombreAlbum = album.collectionName;
 
-              console.log("Eliminar " + nombreAlbum);
-
               if (album.collectionName.length > 30) {
                 nombreAlbum = album.collectionName.substring(0, 30) + "...";
               }
@@ -161,12 +190,6 @@ export const searchAlbums = (artist) => {
               // Si tenemos más de un album igual, no eliminamos el botón de eliminar
               if (clicks == 0) {
                 card.removeChild(botonEliminar);
-              }
-
-              const notificacionesActuales =
-                notificaciones.querySelectorAll(".alert-dismissible");
-              if (notificacionesActuales.length >= 10) {
-                notificaciones.removeChild(notificacionesActuales[0]);
               }
 
               // div principal
@@ -187,7 +210,7 @@ export const searchAlbums = (artist) => {
               // texto
               var strongElement = document.createElement("strong");
               strongElement.appendChild(
-                document.createTextNode("Albúm elimiando del carrito: ")
+                document.createTextNode("Albúm eliminado del carrito: ")
               );
 
               // nombre del album
@@ -202,6 +225,14 @@ export const searchAlbums = (artist) => {
 
               // agregar a el div de notificaciones
               notificaciones.appendChild(alertDiv);
+
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Álbum eliminado',
+                  text: `Álbum ${nombreAlbum} eliminado del carrito.`,
+                  showConfirmButton: false,
+                  timer: 2000 // Duración en milisegundos
+                });
             }
           });
 
@@ -233,3 +264,12 @@ export const searchAlbums = (artist) => {
       console.error("Hubo un problema con la solicitud:", error);
     });
 };
+
+
+
+limpiarHistorial.addEventListener('click',(e)=> {
+    let alertNotificaciones = notificaciones.querySelectorAll('.alert-dismissible');
+    alertNotificaciones.forEach(notificacion => {
+        notificaciones.removeChild(notificacion);
+      });
+})
