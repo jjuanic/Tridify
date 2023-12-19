@@ -26,8 +26,9 @@ export const notificarSuccess = (nombreAlbum) =>{
     document.createTextNode("Albúm agregado al carrito: ")
   );
 
+
   // nombre del album
-  var textNode = document.createTextNode(nombreAlbum);
+  var textNode = document.createTextNode('"' + nombreAlbum + '"');
 
   // Agregar los elementos al div principal
   alertDiv.appendChild(closeButton);
@@ -40,7 +41,7 @@ export const notificarSuccess = (nombreAlbum) =>{
     Swal.fire({
       icon: 'success',
       title: 'Álbum agregado',
-      text: `Álbum ${nombreAlbum} agregado al carrito.`,
+      text: `Álbum "${nombreAlbum}" agregado al carrito.`,
       showConfirmButton: false,
       timer: 1800 // Duración en milisegundos
     });
@@ -69,7 +70,7 @@ export const notificarRemove = (nombreAlbum) =>{
   );
 
   // nombre del album
-  var textNode = document.createTextNode(nombreAlbum);
+  var textNode = document.createTextNode('"' + nombreAlbum + '"');
 
   // Agregar los elementos al div principal
   alertDiv.appendChild(closeButton);
@@ -84,11 +85,21 @@ export const notificarRemove = (nombreAlbum) =>{
     Swal.fire({
       icon: 'success',
       title: 'Álbum eliminado',
-      text: `Álbum ${nombreAlbum} eliminado del carrito.`,
+      text: `Álbum "${nombreAlbum}" eliminado del carrito.`,
       showConfirmButton: false,
       timer: 2000 // Duración en milisegundos
     });
 }
+export const notificarError = () =>{
+Swal.fire({
+    icon: 'error',
+    title: 'Error!',
+    text: `¡La base de datos no está funcionando!.`,
+    showConfirmButton: false,
+    timer: 2000 // Duración en milisegundos
+  });
+}
+
 
 limpiarHistorial.addEventListener('click',(e)=> {
     let alertNotificaciones = notificaciones.querySelectorAll('.alert-dismissible');

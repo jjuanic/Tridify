@@ -80,7 +80,7 @@ export const searchAlbums = (artist) => {
         col.appendChild(card);
         albums.appendChild(col);
 
-        // Boton Agregar
+        //// ========================================Boton Agregar========================================
         let botonAgregar = document.createElement("button");
         botonAgregar.classList.add("btn", "btn-success");
         botonAgregar.innerText = "Agregar al Carrito";
@@ -96,13 +96,14 @@ export const searchAlbums = (artist) => {
           //actualizamos la cantidad del carrito
           cont.innerHTML=cantidad;
           
+          // agregamos al localStorage
           carrito.push(album);
-
           localStorage.setItem("carrito", JSON.stringify(carrito));
 
+          // enviamos una notificación
           notificarSuccess(album.collectionName)
 
-          // Boton Eliminar
+          // ========================================Boton Eliminar========================================
           let botonEliminar = document.createElement("button");
           botonEliminar.classList.add("btn", "btn-danger");
           botonEliminar.innerText = "Eliminar del Carrito";
@@ -123,7 +124,6 @@ export const searchAlbums = (artist) => {
             // actualizamos la cantidad del carrito
             cont.innerHTML=cantidad
             
-
             // Buscamos el índice del álbum en el carrito
             const index = carrito.findIndex(
               (item) => item.collectionId === album.collectionId
@@ -133,20 +133,21 @@ export const searchAlbums = (artist) => {
               // Eliminamos el álbum
               carrito.splice(index, 1);
 
+
               let nombreAlbum = album.collectionName;
 
               if (album.collectionName.length > 30) {
                 nombreAlbum = album.collectionName.substring(0, 30) + "...";
               }
 
+
               // Actualizamos LocalStorage
               localStorage.setItem("carrito", JSON.stringify(carrito));
-
               // Si tenemos más de un album igual, no eliminamos el botón de eliminar
               if (clickAlbum == 0) {
                 card.removeChild(botonEliminar);
               }
-
+              // enviamos una notificación
               notificarRemove(nombreAlbum)
             }
           });
@@ -162,6 +163,7 @@ export const searchAlbums = (artist) => {
         // botón que nos lleva a la información del álbum en la página de ITunes
         let pagina = album.collectionViewUrl;
 
+        // ========================================Boton Info========================================
         let BotonInfo = document.createElement("button");
         BotonInfo.classList.add("btn", "btn-info");
         BotonInfo.innerText = "Detalles";
@@ -177,5 +179,6 @@ export const searchAlbums = (artist) => {
     })
     .catch((error) => {
       console.error("Hubo un problema con la solicitud:", error);
+      notificarError();
     });
 };
