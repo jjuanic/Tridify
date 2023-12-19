@@ -2,12 +2,13 @@ import { searchAlbums } from "./albums.js";
 
 // Obtener elementos del DOM
 const busquedaInput = localStorage.getItem('busqueda');
+const busquedaDiv = document.getElementById('busquedaDiv');
 
 const busquedaH1 = document.createElement('h1');
   busquedaH1.className= 'text-center';
   busquedaH1.style= "padding:2%";
   busquedaH1.innerText='Resultados de la busqueda de: '+JSON.stringify(busquedaInput);
-  busquedaDiv.appendChild(busquedaH1)
+busquedaDiv.appendChild(busquedaH1)
 
 searchAlbums(busquedaInput);
 

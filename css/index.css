@@ -4,7 +4,8 @@
   box-sizing: border-box;
 }
 
-.container-90 {
+.container-90
+ {
   width: 90% !important; /* Sobrescribe la anchura predeterminada de Bootstrap */
   max-width: 100%; /* Garantiza que no se extienda más allá del ancho máximo */
   margin-left: auto; /* Centra el contenedor horizontalmente */

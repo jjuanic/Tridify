@@ -100,11 +100,41 @@ Swal.fire({
   });
 }
 
-
 limpiarHistorial.addEventListener('click',(e)=> {
     e.preventDefault();
-    let alertNotificaciones = notificaciones.querySelectorAll('.alert-dismissible');
-    alertNotificaciones.forEach(notificacion => {
-        notificaciones.removeChild(notificacion);
-      });
-})
+    Swal.fire({
+        title: "Estás seguro de borrar el historial?",
+        showDenyButton: true,
+        confirmButtonText: "Si",
+        denyButtonText: `No`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Notificaciones limpias!", "", "success");
+          let alertNotificaciones = notificaciones.querySelectorAll('.alert-dismissible');
+          alertNotificaciones.forEach(notificacion => {
+          notificaciones.removeChild(notificacion);
+        });
+        } else if (result.isDenied) {
+          Swal.fire("No se han eliminado las notificaciones", "", "info");
+        }
+      })})
+
+limpiarCarrito.addEventListener('click',(e)=> {
+   e.preventDefault();
+        Swal.fire({
+            title: "¿Estás seguro de borrar el carrito?",
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: "Borrar",
+            denyButtonText: `No borrar`
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire("Carrito limpio!", "", "success");
+              // limpiar carrito
+              localStorage.removeItem('carrito');
+              location.reload();
+            } else if (result.isDenied) {
+              Swal.fire("No se ha eliminado el carrito", "", "info");
+            }
+          })});
+
