@@ -17,12 +17,14 @@ if (carritoLocal != null) {
   carrito = JSON.parse(carritoLocal)
 
   carrito.forEach(album => {
-    total = total + album.collectionPrice;
+    total=total+album.collectionPrice
+    
   });
+  total=Math.abs(total).toFixed(2)
 
   cantidad = carrito.length;
   cont.innerHTML=cantidad;
-  precio.innerText=`Precio: $${Math.abs(total).toFixed(2)}`
+  precio.innerText=`Precio: $${total}`
 } 
 console.log(total,cantidad);
 
@@ -99,55 +101,6 @@ export const searchAlbums = (artist) => {
         const busquedaAlbum = carrito.findIndex(
           (item) => item.collectionId === album.collectionId
         );
-
-        // si está en el carrito, hay que agregarle un botón eliminar
-        if (busquedaAlbum !== -1) {
-           // ========================================Boton Eliminar========================================
-           let botonEliminar = document.createElement("button");
-           botonEliminar.classList.add("btn", "btn-danger");
-           botonEliminar.innerText = "Eliminar del Carrito";
-           botonEliminar.style.width = "100%";
-           botonEliminar.style.marginTop = "2px";
-           botonEliminar.style.marginBottom = "2px";
-
-           botonEliminar.addEventListener("click", (e) => {
-            e.preventDefault();
-            
-            // Buscamos el índice del álbum en el carrito
-            const index = carrito.findIndex(
-              (item) => item.collectionId === album.collectionId
-            );
-
-            if (index !== -1) {
-              // Eliminamos el álbum
-              carrito.splice(index, 1);
-
-              let nombreAlbum = album.collectionName;
-
-              if (album.collectionName.length > 30) {
-                nombreAlbum = album.collectionName.substring(0, 30) + "...";
-              }
-
-              // Actualizamos LocalStorage
-              localStorage.setItem("carrito", JSON.stringify(carrito));
-
-              cantidad = carrito.length;
-              total=total-album.collectionPrice
-              console.log(total,cantidad);
-
-              precio.innerText=`Precio: $${Math.abs(total).toFixed(2)}`
-              cont.innerHTML=cantidad;
-
-              const buscaOtro = carrito.findIndex(
-                (item) => item.collectionId === album.collectionId
-              );
-    
-              if (buscaOtro == -1) {
-                card.removeChild(botonEliminar);
-              }
-        }})
-          card.appendChild(botonEliminar);
-        }
         //// ========================================Boton Agregar========================================
         let botonAgregar = document.createElement("button");
         botonAgregar.classList.add("btn", "btn-success");
@@ -204,9 +157,11 @@ export const searchAlbums = (artist) => {
 
               cantidad = carrito.length;
               total=total-album.collectionPrice
+              total=Math.abs(total).toFixed(2)
+
               console.log(total,cantidad);
 
-              precio.innerText=`Precio: $${Math.abs(total).toFixed(2)}`
+              precio.innerText=`Precio: $${total}`
               cont.innerHTML=cantidad
 
               // Si tenemos más de un album igual, no eliminamos el botón de eliminar
@@ -245,6 +200,55 @@ export const searchAlbums = (artist) => {
         });
 
         card.appendChild(BotonInfo);
+
+        // si está en el carrito, hay que agregarle un botón eliminar
+        if (busquedaAlbum !== -1) {
+          // ========================================Boton Eliminar========================================
+          let botonEliminar = document.createElement("button");
+          botonEliminar.classList.add("btn", "btn-danger");
+          botonEliminar.innerText = "Eliminar del Carrito";
+          botonEliminar.style.width = "100%";
+          botonEliminar.style.marginTop = "2px";
+          botonEliminar.style.marginBottom = "2px";
+
+          botonEliminar.addEventListener("click", (e) => {
+           e.preventDefault();
+           
+           // Buscamos el índice del álbum en el carrito
+           const index = carrito.findIndex(
+             (item) => item.collectionId === album.collectionId
+           );
+
+           if (index !== -1) {
+             // Eliminamos el álbum
+             carrito.splice(index, 1);
+
+             let nombreAlbum = album.collectionName;
+
+             if (album.collectionName.length > 30) {
+               nombreAlbum = album.collectionName.substring(0, 30) + "...";
+             }
+
+             // Actualizamos LocalStorage
+             localStorage.setItem("carrito", JSON.stringify(carrito));
+
+             cantidad = carrito.length;
+             total=total-album.collectionPrice
+             console.log(total,cantidad);
+
+             precio.innerText=`Precio: $${Math.abs(total).toFixed(2)}`
+             cont.innerHTML=cantidad;
+
+             const buscaOtro = carrito.findIndex(
+               (item) => item.collectionId === album.collectionId
+             );
+   
+             if (buscaOtro == -1) {
+               card.removeChild(botonEliminar);
+             }
+       }})
+         card.appendChild(botonEliminar);
+       }
       });
     })
     .catch((error) => {
