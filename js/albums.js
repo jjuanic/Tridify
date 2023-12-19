@@ -136,6 +136,8 @@ export const searchAlbums = (artist) => {
 
           botonEliminar.addEventListener("click", (e) => {
             e.preventDefault();
+
+            clickAlbum = clickAlbum - 1;
             
             // Buscamos el índice del álbum en el carrito
             const index = carrito.findIndex(
@@ -164,6 +166,8 @@ export const searchAlbums = (artist) => {
               precio.innerText=`Precio: $${total}`
               cont.innerHTML=cantidad
 
+              card.appendChild(botonEliminar);
+
               // Si tenemos más de un album igual, no eliminamos el botón de eliminar
               const buscaOtro = carrito.findIndex(
                 (item) => item.collectionId === album.collectionId
@@ -176,11 +180,10 @@ export const searchAlbums = (artist) => {
               notificarRemove(nombreAlbum)
             }
           });
-
-          // si tenemos un álbum agregado, agregamos el botón de eliminar
-          if (clickAlbum == 1) {
+          if(clickAlbum == 1) {
             card.appendChild(botonEliminar);
           }
+          
         });
 
         card.appendChild(botonAgregar);
