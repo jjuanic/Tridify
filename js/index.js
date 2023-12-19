@@ -101,6 +101,12 @@ const searchAlbums = (artist) => {
           alertDiv.appendChild(strongElement);
           alertDiv.appendChild(document.createTextNode(textNode.textContent));
 
+          const notificacionesActuales = notificaciones.querySelectorAll('.alert-dismissible');
+          if (notificacionesActuales.length >= 8) {
+            // Si hay 8 o más notificaciones, elimina la más antigua
+            notificaciones.removeChild(notificacionesActuales[0]); // Elimina la primera notificación (la más antigua)
+          }        
+
           // Agregar el div principal al documento
           notificaciones.appendChild(alertDiv);
 
@@ -135,6 +141,12 @@ const searchAlbums = (artist) => {
               if (clicks == 0){
               card.removeChild(botonEliminar)}
 
+              const notificacionesActuales = notificaciones.querySelectorAll('.alert-dismissible');
+              if (notificacionesActuales.length >= 8) {
+                // Si hay 5 o más notificaciones, elimina la más antigua
+                notificaciones.removeChild(notificacionesActuales[0]); // Elimina la primera notificación (la más antigua)
+              }
+            
               // Crear el elemento div principal
               var alertDiv = document.createElement('div');
               alertDiv.classList.add('alert', 'alert-dismissible', 'alert-danger', 'less-width'); // Agregar la clase 'less-width'
