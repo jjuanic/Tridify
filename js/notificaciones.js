@@ -102,6 +102,7 @@ Swal.fire({
 
 
 limpiarHistorial.addEventListener('click',(e)=> {
+    e.preventDefault();
     let alertNotificaciones = notificaciones.querySelectorAll('.alert-dismissible');
     alertNotificaciones.forEach(notificacion => {
         notificaciones.removeChild(notificacion);
