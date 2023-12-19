@@ -1,3 +1,5 @@
+import { notificarRemove, notificarSuccess } from "./notificaciones.js";
+
 const albums = document.getElementById("contenedorAlbumes");
 const notificaciones = document.getElementById("notificaciones");
 const contador = document.getElementById("elemCarrito");
@@ -7,9 +9,6 @@ cont.innerHTML =0;
 contador.appendChild(cont);
 let carrito = [];
 let total = 0;
-
-
-
 
 export const searchAlbums = (artist) => {
   const url = `https://itunes.apple.com/search?term=${artist}&entity=album&sort=popular&limit=57`;
@@ -98,56 +97,11 @@ export const searchAlbums = (artist) => {
           //actualizamos la cantidad del carrito
           cont.innerHTML=cantidad;
           
-
           carrito.push(album);
-
-          let nombreAlbum = album.collectionName;
-
-          if (album.collectionName.length > 30) {
-            nombreAlbum = album.collectionName.substring(0, 30) + "...";
-          }
 
           localStorage.setItem("carrito", JSON.stringify(carrito));
 
-          // Div principal
-          var alertDiv = document.createElement("div");
-          alertDiv.classList.add(
-            "alert",
-            "alert-dismissible",
-            "alert-success",
-            "less-width"
-          );
-
-          // botón de cierre
-          var closeButton = document.createElement("button");
-          closeButton.setAttribute("type", "button");
-          closeButton.classList.add("btn-close");
-          closeButton.setAttribute("data-bs-dismiss", "alert");
-
-          // texto
-          var strongElement = document.createElement("strong");
-          strongElement.appendChild(
-            document.createTextNode("Albúm agregado al carrito: ")
-          );
-
-          // nombre del album
-          var textNode = document.createTextNode(nombreAlbum);
-
-          // Agregar los elementos al div principal
-          alertDiv.appendChild(closeButton);
-          alertDiv.appendChild(strongElement);
-          alertDiv.appendChild(document.createTextNode(textNode.textContent));
-
-          // Agregar a el div de notificaciones
-          notificaciones.appendChild(alertDiv);
-
-            Swal.fire({
-              icon: 'success',
-              title: 'Álbum agregado',
-              text: `Álbum ${nombreAlbum} agregado al carrito.`,
-              showConfirmButton: false,
-              timer: 1800 // Duración en milisegundos
-            });
+          notificarSuccess(album.collectionName)
 
           // Boton Eliminar
           let botonEliminar = document.createElement("button");
@@ -194,47 +148,7 @@ export const searchAlbums = (artist) => {
                 card.removeChild(botonEliminar);
               }
 
-              // div principal
-              var alertDiv = document.createElement("div");
-              alertDiv.classList.add(
-                "alert",
-                "alert-dismissible",
-                "alert-danger",
-                "less-width"
-              );
-
-              // boton de cierre
-              var closeButton = document.createElement("button");
-              closeButton.setAttribute("type", "button");
-              closeButton.classList.add("btn-close");
-              closeButton.setAttribute("data-bs-dismiss", "alert");
-
-              // texto
-              var strongElement = document.createElement("strong");
-              strongElement.appendChild(
-                document.createTextNode("Albúm eliminado del carrito: ")
-              );
-
-              // nombre del album
-              var textNode = document.createTextNode(nombreAlbum);
-
-              // Agregar los elementos al div principal
-              alertDiv.appendChild(closeButton);
-              alertDiv.appendChild(strongElement);
-              alertDiv.appendChild(
-                document.createTextNode(textNode.textContent)
-              );
-
-              // agregar a el div de notificaciones
-              notificaciones.appendChild(alertDiv);
-
-                Swal.fire({
-                  icon: 'success',
-                  title: 'Álbum eliminado',
-                  text: `Álbum ${nombreAlbum} eliminado del carrito.`,
-                  showConfirmButton: false,
-                  timer: 2000 // Duración en milisegundos
-                });
+              notificarRemove(nombreAlbum)
             }
           });
 
@@ -266,12 +180,3 @@ export const searchAlbums = (artist) => {
       console.error("Hubo un problema con la solicitud:", error);
     });
 };
-
-
-
-limpiarHistorial.addEventListener('click',(e)=> {
-    let alertNotificaciones = notificaciones.querySelectorAll('.alert-dismissible');
-    alertNotificaciones.forEach(notificacion => {
-        notificaciones.removeChild(notificacion);
-      });
-})
