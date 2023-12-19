@@ -1,9 +1,10 @@
 
 albums = document.getElementById('contenedorAlbumes')
-lista = []
+notificaciones = document.getElementById('notificaciones')
+carrito = []
 
 const searchAlbums = (artist) => {
-    const url = `https://itunes.apple.com/search?term=${artist}&entity=album&sort=popular`;
+    const url = `https://itunes.apple.com/search?term=${artist}&entity=album&sort=popular&limit=20`;
     fetch(url)
     .then(response => response.json())
     .then(data => {
@@ -21,8 +22,15 @@ const searchAlbums = (artist) => {
         card.style.padding= "5%";
 
         //Nombre del Albúm
+
+        let nombreAlbum = album.collectionName
+
+        if (album.collectionName.length > 30) {
+          nombreAlbum = album.collectionName.substring(0, 30) + "..."
+        }
+
         let cardTitle = document.createElement('h5');
-        cardTitle.innerText = album.collectionName
+        cardTitle.innerText = nombreAlbum
         
         //Imagén del Albúm
         let img = document.createElement('img');
@@ -33,7 +41,16 @@ const searchAlbums = (artist) => {
         // Precio y Género
         let description = document.createElement('p');
         description.classList.add("card-text");
-        description.innerText = 'Género: ' + album.primaryGenreName + "\n" + "Precio: " + album.collectionPrice;
+
+        let nombreArtista = album.artistName
+
+        if (album.artistName.length > 25) {
+          nombreArtista = album.artistName.substring(0, 25) + "..."
+        }
+
+        description.innerText = 'Artista: ' + nombreArtista + "\n" + 
+                                'Género: ' + album.primaryGenreName+ "\n" + 
+                                "Precio: " + album.collectionPrice;
         
         
         card.appendChild(cardTitle)
@@ -45,22 +62,65 @@ const searchAlbums = (artist) => {
 
         let botonAgregar = document.createElement('button');
         botonAgregar.classList.add("btn","btn-success");
-        botonAgregar.innerText = 'Agregar a la Lista';  
+        botonAgregar.innerText = 'Agregar al Carrito';  
         botonAgregar.style.width= '100%'
         botonAgregar.addEventListener('click', (e) => {
             e.preventDefault();
    
-            albums.push(album);
+            carrito.push(album);
+
+            let nombreAlbum = album.collectionName
+
+            if (album.collectionName.length > 30) {
+              nombreAlbum = album.collectionName.substring(0, 30) + "..."
+            }
    
-            localStorage.setItem('Albums', JSON.stringify(albums));
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            
+                          // Crear el elemento div principal
+              var alertDiv = document.createElement('div');
+              alertDiv.classList.add('alert', 'alert-dismissible', 'alert-success', 'less-width'); // Agregar la clase 'less-width'
+
+              // Crear el botón de cierre
+              var closeButton = document.createElement('button');
+              closeButton.setAttribute('type', 'button');
+              closeButton.classList.add('btn-close');
+              closeButton.setAttribute('data-bs-dismiss', 'alert');
+
+              // Crear el elemento strong para 'Well done!'
+              var strongElement = document.createElement('strong');
+              strongElement.appendChild(document.createTextNode('Albúm agregado al carrito: '));
+
+              // Crear el texto para 'You successfully read'
+              var textNode = document.createTextNode(nombreAlbum);
+
+              // Agregar los elementos al div principal
+              alertDiv.appendChild(closeButton);
+              alertDiv.appendChild(strongElement);
+              alertDiv.appendChild(document.createTextNode(textNode.textContent));
+
+              // Agregar el div principal al documento
+              notificaciones.appendChild(alertDiv);
+
+
         })
 
 
         card.appendChild(botonAgregar)
+        let pagina = album.collectionViewUrl
 
-        const nombresDeArtistas = json.map((elemento) => elemento.artistName);
-        const resultado = elementoMasRepetido(nombresDeArtistas);
-        console.log(`El elemento más repetido es: ${resultado}`);
+        let BotonInfo=document.createElement('button');
+        BotonInfo.classList.add("btn","btn-info");
+        BotonInfo.innerText = 'Detalles';  
+        BotonInfo.style.width= '100%'
+        BotonInfo.style.marginTop= '2px'
+        BotonInfo.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.open(pagina, '_blank'); // Reemplaza la URL por la página que quieras abrir
+        })
+
+
+        card.appendChild(BotonInfo)
         });
     })
     .catch(error => {
@@ -68,31 +128,7 @@ const searchAlbums = (artist) => {
     });
 }
 
-searchAlbums('Porcupine Tree');
+searchAlbums('albums');
 
-function elementoMasRepetido(lista) {
-    let conteo = {};
-  
-    lista.forEach((elemento) => {
-      if (conteo[elemento]) {
-        conteo[elemento]++;
-      } else {
-        conteo[elemento] = 1;
-      }
-    });
-  
-    let elementoMasRepetido;
-    let maxRepeticiones = 0;
-  
-    // Encontrar el elemento con más repeticiones
-    for (let elemento in conteo) {
-      if (conteo[elemento] > maxRepeticiones) {
-        maxRepeticiones = conteo[elemento];
-        elementoMasRepetido = elemento;
-      }
-    }
-  
-    return elementoMasRepetido;
-  }
   
 
