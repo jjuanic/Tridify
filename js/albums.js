@@ -1,13 +1,23 @@
 import { notificarRemove, notificarSuccess } from "./notificaciones.js";
 
+function contarRepeticiones(array, elemento) {
+  let contador = 0;
+  for (let i = 0; i < array.length; i++) {
+      if (array[i] === elemento) {
+          contador++;
+      }
+  }
+  return contador;
+}
+
 const albums = document.getElementById("contenedorAlbumes");
 const contador = document.getElementById("elemCarrito");
 const precio = document.getElementById("precio");
 
-let cont = document.createElement("p");
+let cont = document.createElement("nav-link");
 cont.innerHTML =0;
 contador.appendChild(cont);
-
+let tieneEliminar = false;
 let carrito = []
 let total = 0;
 let cantidad = 1;
@@ -23,7 +33,7 @@ if (carritoLocal != null) {
   total=Math.abs(total).toFixed(2)
 
   cantidad = carrito.length;
-  cont.innerHTML=cantidad;
+  cont.innerHTML='('+cantidad+')';
   precio.innerText=`Precio: $${total}`
 } 
 console.log(total,cantidad);
@@ -121,7 +131,7 @@ export const searchAlbums = (artist) => {
             total=total+album.collectionPrice
           });;
           console.log(total,cantidad);
-          cont.innerHTML=cantidad;
+          cont.innerHTML='('+cantidad+')';
           precio.innerText=`Precio: $${Math.abs(total).toFixed(2)}`
 
           // enviamos una notificación
@@ -164,23 +174,21 @@ export const searchAlbums = (artist) => {
               console.log(total,cantidad);
 
               precio.innerText=`Precio: $${total}`
-              cont.innerHTML=cantidad
+              cont.innerHTML='('+cantidad+')'
 
               card.appendChild(botonEliminar);
 
-              // Si tenemos más de un album igual, no eliminamos el botón de eliminar
-              const buscaOtro = carrito.findIndex(
-                (item) => item.collectionId === album.collectionId
-              );
+              let repeticiones = contarRepeticiones(carrito,album);
+              console.log(repeticiones);
     
-              if (buscaOtro == -1) {
+              if (repeticiones == 0) {
                 card.removeChild(botonEliminar);
               }
               // enviamos una notificación
               notificarRemove(nombreAlbum)
             }
           });
-          if(clickAlbum == 1) {
+          if(clickAlbum == 1 && !tieneEliminar) {
             card.appendChild(botonEliminar);
           }
           
@@ -207,6 +215,7 @@ export const searchAlbums = (artist) => {
         // si está en el carrito, hay que agregarle un botón eliminar
         if (busquedaAlbum !== -1) {
           // ========================================Boton Eliminar========================================
+          tieneEliminar = true;
           let botonEliminar = document.createElement("button");
           botonEliminar.classList.add("btn", "btn-danger");
           botonEliminar.innerText = "Eliminar del Carrito";
@@ -240,13 +249,12 @@ export const searchAlbums = (artist) => {
              console.log(total,cantidad);
 
              precio.innerText=`Precio: $${Math.abs(total).toFixed(2)}`
-             cont.innerHTML=cantidad;
+             cont.innerHTML='('+cantidad+')';
 
-             const buscaOtro = carrito.findIndex(
-               (item) => item.collectionId === album.collectionId
-             );
+             let repeticiones = contarRepeticiones(carrito,album);
+             console.log(repeticiones);
    
-             if (buscaOtro == -1) {
+             if (repeticiones == 0) {
                card.removeChild(botonEliminar);
              }
        }})
