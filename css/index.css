@@ -10,6 +10,11 @@
   padding: 0.5;
 } */
 
+.logoNav{
+  margin-right: 10px;
+  width:35px;
+}
+
 .container-90
  {
   width: 90% !important; /* Sobrescribe la anchura predeterminada del container */
