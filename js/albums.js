@@ -218,7 +218,6 @@ export const searchAlbums = (artist) => {
         // si está en el carrito, hay que agregarle un botón eliminar
         if (busquedaAlbum !== -1) {
           // ========================================Boton Eliminar========================================
-          tieneEliminar = true;
           let botonEliminar = document.createElement("button");
           botonEliminar.classList.add("btn", "btn-danger");
           botonEliminar.innerText = "Eliminar del Carrito";
@@ -259,9 +258,11 @@ export const searchAlbums = (artist) => {
    
              if (repeticiones == 0) {
                card.removeChild(botonEliminar);
+               tieneEliminar= false;
              }
        }})
          card.appendChild(botonEliminar);
+         tieneEliminar = true;
        }
       });
     })
