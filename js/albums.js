@@ -10,6 +10,7 @@ function contarRepeticiones(array, elemento) {
   return contador;
 }
 
+// Inicialización de las variables.
 const albums = document.getElementById("contenedorAlbumes");
 const contador = document.getElementById("elemCarrito");
 const precio = document.getElementById("precio");
@@ -22,6 +23,7 @@ let carrito = []
 let total = 0;
 let cantidad = 1;
 
+// Tratamiento del localStorage en caso de tener algo guardado en memoria.
 let carritoLocal = localStorage.getItem('carrito');
 if (carritoLocal != null) {
   carrito = JSON.parse(carritoLocal)
@@ -30,7 +32,7 @@ if (carritoLocal != null) {
     total=total+album.collectionPrice
     
   });
-  total=Math.abs(total).toFixed(2)
+  total=Math.abs(total).toFixed(2) // Redondeamiento de precios, para evitar errores muy pequeños en los cálculos.
 
   cantidad = carrito.length;
   cont.innerHTML='('+cantidad+')';
@@ -52,11 +54,13 @@ export const searchAlbums = (artist) => {
         // Columna
         let col = document.createElement("div");
         col.classList.add("col-md-2", "mb-4", "pr-md-4");
+        
 
         //Tarjeta
         let card = document.createElement("div");
         card.classList.add("card");
         card.style.width = "100%";
+        card.style.height = "100%";
         card.style.padding = "5%";
 
         //Nombre del Albúm
@@ -179,7 +183,6 @@ export const searchAlbums = (artist) => {
               card.appendChild(botonEliminar);
 
               let repeticiones = contarRepeticiones(carrito,album);
-              console.log(repeticiones);
     
               if (repeticiones == 0) {
                 card.removeChild(botonEliminar);

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="assets/images/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/notificaciones.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <title>Tridify</title>
+
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="primary">
+        <div class="container-fluid">
+          <img src="./assets/images/logo.png" alt="" class="logoNav">
+          <a class="navbar-brand" href="./index.html">Tridify</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03"
+            aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav me-auto">
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Carrito</a>
+              </li>
+              <li>
+                <a class="nav-link" href="#" id="elemCarrito"></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Login</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                  aria-expanded="false">Nosotros</a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Preguntas Frecuentes</a>
+                  <a class="dropdown-item" href="#">Historia</a>
+                </div>
+              </li>
+            </ul>
+    
+            <form class="d-flex">
+              <input id="busquedaInput" class="form-control me-sm-2" type="search" placeholder="Búsqueda">
+              <button id="buscarButton" class="btn btn-primary my-2 my-sm-0" type="submit">Búsqueda</button>          
+            </form>
+          </div>
+        </div>
+      </nav>
+      <div class="b-example-divider"></div>
+
+
+      <h1 class="text-center" style="padding: 2%;">Carrito</h1>
+
+      <main class="container container-90">
+        <div class="row">
+          <div class="col-lg-2 notificaciones order-lg-last mb-2" id="carritoTotal" class="carritoTotal">
+            <!-- Columna derecha (2 de 12 columnas en pantallas grandes) -->
+            <h2 style="text-align: center;">Total</h2>
+            <h6 style="text-align:center" id="precio">$15</h6>
+          </div>
+          <div class="col-lg-10"> <!-- Columna izquierda (10 de 12 columnas en pantallas grandes) -->
+            <div class="row" id="carritoAlbumes">
+
+            </div>
+          </div>
+          
+        </div>
+      </main>
+
+
+
+
+
+
+
+
+
+  <script type="module" src="./js/albums.js"></script>
+  <script type="module" src="./js/index.js"></script>
+  <script type="module" src="./js/notificaciones.js"></script>
+  <script type="module" src="./js/busqueda.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
