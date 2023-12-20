@@ -1,4 +1,5 @@
-// import { notificarRemove, notificarSuccess } from "./notificaciones.js";
+//import { swalAgregar, swalEliminar} from "./notificaciones.js";
+
 function contarRepeticiones(array, elemento) {
     let contador = 0;
     for (let i = 0; i < array.length; i++) {
@@ -131,7 +132,13 @@ carrito.forEach((album) => {
         precio.innerText = `Precio: $${Math.abs(total).toFixed(2)}`
 
         // enviamos una notificación
-        notificarSuccess(album.collectionName)
+        Swal.fire({
+            icon: 'success',
+            title: 'Álbum agregado',
+            text: `Álbum "${nombreAlbum}" agregado al carrito.`,
+            showConfirmButton: false,
+            timer: 1800 // Duración en milisegundos
+          });
     });
 
     card.appendChild(botonAgregar);
@@ -197,8 +204,33 @@ carrito.forEach((album) => {
                 col.removeChild(card);
             }
             // enviamos una notificación
-            notificarRemove(nombreAlbum)
+            Swal.fire({
+                icon: 'success',
+                title: 'Álbum eliminado',
+                text: `Álbum "${nombreAlbum}" eliminado del carrito.`,
+                showConfirmButton: false,
+                timer: 2000 // Duración en milisegundos
+              })
         }
     });
         card.appendChild(botonEliminar);
 }});
+
+limpiarCarrito.addEventListener('click',(e)=> {
+    e.preventDefault();
+         Swal.fire({
+             title: "¿Estás seguro de borrar el carrito?",
+             showDenyButton: true,
+             showCancelButton: false,
+             confirmButtonText: "Borrar",
+             denyButtonText: `No borrar`
+           }).then((result) => {
+             if (result.isConfirmed) {
+               Swal.fire("Carrito limpio!", "", "success");
+               // limpiar carrito
+               localStorage.removeItem('carrito');
+               location.reload();
+             } else if (result.isDenied) {
+               Swal.fire("No se ha eliminado el carrito", "", "info");
+             }
+           })});

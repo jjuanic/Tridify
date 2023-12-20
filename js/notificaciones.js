@@ -138,3 +138,22 @@ limpiarCarrito.addEventListener('click',(e)=> {
             }
           })});
 
+
+export const swalAgregar = (nombreAlbum) => {
+  Swal.fire({
+    icon: 'success',
+    title: 'Álbum agregado',
+    text: `Álbum "${nombreAlbum}" agregado al carrito.`,
+    showConfirmButton: false,
+    timer: 1800 // Duración en milisegundos
+  });
+}
+
+export const swalEliminar = (nombreAlbum) =>{
+  Swal.fire({
+    icon: 'success',
+    title: 'Álbum eliminado',
+    text: `Álbum "${nombreAlbum}" eliminado del carrito.`,
+    showConfirmButton: false,
+    timer: 2000 // Duración en milisegundos
+  })};
