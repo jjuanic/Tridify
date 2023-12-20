@@ -25,16 +25,26 @@ carrito.forEach(album => {
 total=Math.abs(total).toFixed(2) 
 const precio = document.getElementById("precio");
 precio.innerText=`Precio: $${total}`
-console.log(cantidad);
 let repeticiones = 0;
 
 let albumsImpresos = []
+let listaRepetidos = {}
+
+carrito.forEach(album => {
+    if (album.collectionName in listaRepetidos) {
+        // Si el nombre del álbum ya está en la lista, incrementa una propiedad del objeto
+        listaRepetidos[album.collectionName].cantidad++;
+    } else {
+        // Si es la primera vez que aparece el nombre del álbum, crea un nuevo objeto con una propiedad 'cantidad'
+        listaRepetidos[album.collectionName] = { cantidad: 1 };
+    }
+});
+
+console.log(listaRepetidos);
 
 carrito.forEach((album) => {
-    repeticiones = contarRepeticiones(carrito,album)
-    if (!albumsImpresos.includes(album.collectionName)){
-    
 
+    if (!albumsImpresos.includes(album.collectionName)) {
     // Columna
     let col = document.createElement("div");
     col.classList.add("col-md-2", "mb-4", "pr-md-4");
@@ -108,6 +118,8 @@ carrito.forEach((album) => {
         // agregamos al localStorage
         carrito.push(album);
         localStorage.setItem("carrito", JSON.stringify(carrito));
+        
+        listaRepetidos[album.collectionName].cantidad++;
 
         cantidad = carrito.length;
         total = 0;
@@ -139,7 +151,6 @@ carrito.forEach((album) => {
     });
 
     card.appendChild(BotonInfo);
-    repeticiones = contarRepeticiones(carrito,album)
 
     // ========================================Boton Eliminar========================================
     let botonEliminar = document.createElement("button");
@@ -160,6 +171,10 @@ carrito.forEach((album) => {
             // Eliminamos el álbum
             carrito.splice(index, 1);
 
+            listaRepetidos[album.collectionName].cantidad--;
+
+            console.log(repeticiones)
+
             let nombreAlbum = album.collectionName;
 
             if (album.collectionName.length > 30) {
@@ -178,8 +193,7 @@ carrito.forEach((album) => {
             precio.innerText = `Precio: $${total}`
             cont.innerHTML = '(' + cantidad + ')'
 
-            
-            if (repeticiones == 0) {
+            if (listaRepetidos[album.collectionName].cantidad == 0) {
                 col.removeChild(card);
             }
             // enviamos una notificación
