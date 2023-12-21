@@ -27,20 +27,20 @@
             <ul class="navbar-nav me-auto">
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Carrito</a>
+                <a class="nav-link" href="./carrito.html">Carrito</a>
               </li>
               <li>
-                <a class="nav-link" href="#" id="elemCarrito"></a>
+                <a class="nav-link" href="./carrito.html" id="elemCarrito"></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="./login.html">Login</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                  aria-expanded="false">Nosotros</a>
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="./preguntasFrecuentes.html" role="button" aria-haspopup="true"
+                aria-expanded="false">Nosotros</a>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Preguntas Frecuentes</a>
-                  <a class="dropdown-item" href="#">Historia</a>
+                  <a class="dropdown-item" href="./preguntasFrecuentes.html">Preguntas Frecuentes</a>
+                  <a class="dropdown-item" href="./historias.html">Historia</a>
                 </div>
               </li>
             </ul>
@@ -63,8 +63,17 @@
             <!-- Columna derecha (2 de 12 columnas en pantallas grandes) -->
             <h2 style="text-align: center;">Total</h2>
             <h6 style="text-align:center" id="precio"></h6>
-            <button class="btn btn-danger regular-button mb-2" id="limpiarCarrito"> Limpiar Carrito </button>
+            
+            <div class="col text-center">
+              <button class="btn btn-danger regular-button mb-2" id="limpiarCarrito"> Limpiar Carrito </button>
+            </div>	
 
+            <div class="col text-center">
+            <a href="./pago.html">
+              <button class="btn btn-success regular-button mb-2"> Pagar </button>
+            </a>
+            </div>
+            
           </div>
           <div class="col-lg-10"> <!-- Columna izquierda (10 de 12 columnas en pantallas grandes) -->
             <div class="row" id="albums">
@@ -85,15 +94,15 @@
 
 
   <div class="container">
-    <footer class="py-3 my-4">
-      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Carrito</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Login</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Preguntas Frecuentes</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Historia</a></li>
-      </ul>
-      <p class="text-center text-muted">&copy; 2023 Tridify, Inc</p>
-    </footer>
+      <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+          <li class="nav-item"><a href="./carrito.html" class="nav-link px-2 text-muted">Carrito</a></li>
+          <li class="nav-item"><a href="./login.html" class="nav-link px-2 text-muted">Login</a></li>
+          <li class="nav-item"><a href="./preguntasFrecuentes.html" class="nav-link px-2 text-muted">Preguntas Frecuentes</a></li>
+          <li class="nav-item"><a href="./historia.html" class="nav-link px-2 text-muted">Historia</a></li>
+        </ul>
+        <p class="text-center text-muted">&copy; 2023 Tridify, Inc</p>
+      </footer>
   </div>
 
 

@@ -16,7 +16,7 @@ let cantidad = carrito.length
 
 const contador = document.getElementById("elemCarrito");
 let cont = document.createElement("nav-link");
-cont.innerHTML =cantidad;
+cont.innerHTML='('+cantidad+')';
 contador.appendChild(cont);
 let total = 0;
 carrito.forEach(album => {
@@ -41,8 +41,6 @@ carrito.forEach(album => {
     }
 });
 
-console.log(listaRepetidos);
-
 carrito.forEach((album) => {
 
     if (!albumsImpresos.includes(album.collectionName)) {
@@ -65,6 +63,7 @@ carrito.forEach((album) => {
     if (album.collectionName.length > 30) {
         nombreAlbum = album.collectionName.substring(0, 30) + "...";
     }
+    
 
     let cardTitle = document.createElement("h5");
     cardTitle.innerText = nombreAlbum;
@@ -98,10 +97,16 @@ carrito.forEach((album) => {
         "\n" +
         "Precio: " +
         album.collectionPrice;
+    
+    let unidades = document.createElement("p")
+    unidades.classList.add("card-text")
+    unidades.innerText = "Unidades: " + listaRepetidos[album.collectionName].cantidad;
+    
 
     card.appendChild(cardTitle);
     card.appendChild(img);
     card.appendChild(description);
+    card.appendChild(unidades)
 
     col.appendChild(card);
     albums.appendChild(col);
@@ -111,7 +116,7 @@ carrito.forEach((album) => {
     //// ========================================Boton Agregar========================================
     let botonAgregar = document.createElement("button");
     botonAgregar.classList.add("btn", "btn-success");
-    botonAgregar.innerText = "Agregar al Carrito";
+    botonAgregar.innerText = "Agregar unidad";
     botonAgregar.style.width = "100%";
     botonAgregar.addEventListener("click", (e) => {
         e.preventDefault();
@@ -127,9 +132,10 @@ carrito.forEach((album) => {
         carrito.forEach(album => {
             total = total + album.collectionPrice
         });;
-        console.log(total, cantidad);
+
         cont.innerHTML = '(' + cantidad + ')';
         precio.innerText = `Precio: $${Math.abs(total).toFixed(2)}`
+        unidades.innerText = "Unidades: " + listaRepetidos[album.collectionName].cantidad;
 
         // enviamos una notificación
         Swal.fire({
@@ -162,7 +168,7 @@ carrito.forEach((album) => {
     // ========================================Boton Eliminar========================================
     let botonEliminar = document.createElement("button");
     botonEliminar.classList.add("btn", "btn-danger");
-    botonEliminar.innerText = "Eliminar del Carrito";
+    botonEliminar.innerText = "Eliminar unidad";
     botonEliminar.style.width = "100%";
     botonEliminar.style.marginTop = "2px";
 
@@ -180,8 +186,6 @@ carrito.forEach((album) => {
 
             listaRepetidos[album.collectionName].cantidad--;
 
-            console.log(repeticiones)
-
             let nombreAlbum = album.collectionName;
 
             if (album.collectionName.length > 30) {
@@ -195,10 +199,9 @@ carrito.forEach((album) => {
             total = total - album.collectionPrice
             total = Math.abs(total).toFixed(2)
 
-            console.log(total, cantidad);
-
             precio.innerText = `Precio: $${total}`
             cont.innerHTML = '(' + cantidad + ')'
+            unidades.innerText = "Unidades: " + listaRepetidos[album.collectionName].cantidad;
 
             if (listaRepetidos[album.collectionName].cantidad == 0) {
                 col.removeChild(card);

@@ -36,7 +36,6 @@ if (carritoLocal != null) {
   cont.innerHTML='('+cantidad+')';
   precio.innerText=`Precio: $${total}`
 } 
-console.log(total,cantidad);
 export const searchAlbums = (artist) => {
   const url = `https://itunes.apple.com/search?term=${artist}&entity=album&sort=popular&limit=57`;
   fetch(url)
@@ -48,7 +47,6 @@ export const searchAlbums = (artist) => {
         // Columna
         let col = document.createElement("div");
         col.classList.add("col-md-2", "mb-4", "pr-md-4");
-        
 
         //Tarjeta
         let card = document.createElement("div");
@@ -129,7 +127,6 @@ export const searchAlbums = (artist) => {
           });;
 
           total=Math.abs(total).toFixed(2) 
-          console.log(total,cantidad);
           cont.innerHTML='('+cantidad+')';
           precio.innerText=`Precio: $${total}`
 
@@ -168,7 +165,6 @@ export const searchAlbums = (artist) => {
               total=total-album.collectionPrice
               total=Math.abs(total).toFixed(2)
 
-              console.log(total,cantidad);
 
               precio.innerText=`Precio: $${total}`
               cont.innerHTML='('+cantidad+')'
@@ -238,13 +234,11 @@ export const searchAlbums = (artist) => {
              cantidad = carrito.length;
              total=total-album.collectionPrice
              total=Math.abs(total).toFixed(2) 
-             console.log(total,cantidad);
 
              precio.innerText=`Precio: $${total}`
              cont.innerHTML='('+cantidad+')';
 
              var repeticiones = contarRepeticiones(carrito,album);
-             console.log("repeticiones: "+ repeticiones);
    
              if (repeticiones == 0) {
                card.removeChild(botonEliminar);
