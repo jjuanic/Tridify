@@ -20,9 +20,6 @@ if (inicioSesion === "true"){
     estadoSesion.innerText = "Sesion no Iniciada"   
 }
 
-
-
-
 const botonRegistro = document.getElementById("registro");
 const botonLogin = document.getElementById("login");
 const botonCerrarSesion = document.getElementById("cerrarSesion");
