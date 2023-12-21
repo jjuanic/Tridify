@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="assets/images/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <title>Tridify</title>
+
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="primary">
+    <div class="container-fluid">
+      <img src="./assets/images/logo.png" alt="" class="logoNav">
+      <a class="navbar-brand" href="./index.html">Tridify</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03"
+        aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav me-auto">
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./carrito.html">Carrito</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./login.html">Login</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="./preguntasFrecuentes.html" role="button" aria-haspopup="true"
+              aria-expanded="false">Nosotros</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="./preguntasFrecuentes.html">Preguntas Frecuentes</a>
+              <a class="dropdown-item" href="./historia.html">Historia</a>
+              <a class="dropdown-item" href="./contacto.html">Contacto</a>
+            </div>
+          </li>
+        </ul>
+
+        <form class="d-flex">
+          <a class="form-control-plaintext" href="./login.html" id="estadoSesion"></a>
+          <input id="busquedaInput" class="form-control me-sm-2" type="search" placeholder="Búsqueda">
+          <button id="buscarButton" class="btn btn-primary my-2 my-sm-0" type="submit">Búsqueda</button>          
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class="b-example-divider"></div>
+  <div class="m-5">
+  <h1 class="text-center" style="margin-top: 2%;">Historia de Tridify</h1>
+
+  <h2>Hace años, un grupo de amantes de la música se reunió en un pequeño café.</h2>
+
+  <p>Entre acordes de guitarra y risas, compartieron historias sobre la dificultad de descubrir nueva música que realmente les cautivara. Algunos recordaron la emoción de encontrar vinilos raros en tiendas de discos, mientras otros hablaban sobre la frustración de no poder acceder fácilmente a la música que amaban.</p>
+
+  <p>Fue en ese café donde nació la idea de Tridify: una plataforma que celebraría la diversidad musical y facilitaría el descubrimiento de nuevos sonidos. El equipo, compuesto por apasionados melómanos y expertos en tecnología, se unió con un objetivo en mente: crear un espacio donde los amantes de la música pudieran explorar, descubrir y disfrutar de la música de una manera totalmente nueva.</p>
+
+  <p>Desde entonces, Tridify ha crecido más allá de sus sueños iniciales. Se ha convertido en un vibrante ecosistema musical donde artistas emergentes pueden compartir sus obras y donde los aficionados pueden sumergirse en géneros musicales que ni siquiera sabían que existían. Con el tiempo, Tridify no solo se convirtió en un mercado de álbumes, sino también en un lugar donde la comunidad musical se conecta, comparte y celebra su pasión en común.</p>
+
+  <p>Cada vez que un usuario descubre un álbum único o encuentra la canción perfecta que resuena en su alma, Tridify celebra junto a ellos. La empresa no solo vende música, sino que construye puentes entre artistas y oyentes, creando un viaje musical personalizado para cada individuo que cruza su puerta digital.</p>
+
+  <p>Con el compromiso de mantener viva la pasión por la música en todas sus formas, Tridify se esfuerza por ser más que una plataforma; es un hogar para la música, la exploración y las conexiones que trascienden las barreras del tiempo y el espacio.</p>
+</div>
+
+  <!-- Footer -->
+
+  <div class="b-example-divider"></div>
+
+
+  <div class="container">
+    <footer class="py-3 my-4">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="./carrito.html" class="nav-link px-2 text-muted">Carrito</a></li>
+        <li class="nav-item"><a href="./login.html" class="nav-link px-2 text-muted">Login</a></li>
+        <li class="nav-item"><a href="./preguntasFrecuentes.html" class="nav-link px-2 text-muted">Preguntas Frecuentes</a></li>
+        <li class="nav-item"><a href="./historia.html" class="nav-link px-2 text-muted">Historia</a></li>
+        <li class="nav-item"><a href="./contacto.html" class="nav-link px-2 text-muted">Contacto</a></li>
+      </ul>
+      <p class="text-center text-muted">&copy; 2023 Tridify, Inc</p>
+    </footer>
+</div>
+  
+  <script type="module" src="./js/pago.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
