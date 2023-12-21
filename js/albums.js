@@ -1,12 +1,12 @@
 import { notificarRemove, notificarSuccess } from "./notificaciones.js";
 
-function contarRepeticiones(array, elemento) {
+function contarRepeticiones(carrito, album) {
   let contador = 0;
-  for (let i = 0; i < array.length; i++) {
-      if (array[i] === elemento) {
-          contador++;
-      }
-  }
+  carrito.forEach(albumCarrito => {
+    if (albumCarrito.collectionName == album.collectionName){
+      contador++
+    }
+  });
   return contador;
 }
 
@@ -18,7 +18,6 @@ const precio = document.getElementById("precio");
 let cont = document.createElement("nav-link");
 cont.innerHTML =0;
 contador.appendChild(cont);
-let tieneEliminar = false;
 let carrito = []
 let total = 0;
 let cantidad = 1;
@@ -29,8 +28,7 @@ if (carritoLocal != null) {
   carrito = JSON.parse(carritoLocal)
 
   carrito.forEach(album => {
-    total=total+album.collectionPrice
-    
+    total=total+album.collectionPrice   
   });
   total=Math.abs(total).toFixed(2) // Redondeamiento de precios, para evitar errores muy pequeños en los cálculos.
 
@@ -39,7 +37,6 @@ if (carritoLocal != null) {
   precio.innerText=`Precio: $${total}`
 } 
 console.log(total,cantidad);
-
 export const searchAlbums = (artist) => {
   const url = `https://itunes.apple.com/search?term=${artist}&entity=album&sort=popular&limit=57`;
   fetch(url)
@@ -48,9 +45,6 @@ export const searchAlbums = (artist) => {
       const json = data.results;
 
       json.forEach((album) => {
-        // Contador para saber cuantos albumes iguales se agregan
-        let clickAlbum = 0;
-
         // Columna
         let col = document.createElement("div");
         col.classList.add("col-md-2", "mb-4", "pr-md-4");
@@ -115,6 +109,7 @@ export const searchAlbums = (artist) => {
         const busquedaAlbum = carrito.findIndex(
           (item) => item.collectionId === album.collectionId
         );
+
         //// ========================================Boton Agregar========================================
         let botonAgregar = document.createElement("button");
         botonAgregar.classList.add("btn", "btn-success");
@@ -122,9 +117,7 @@ export const searchAlbums = (artist) => {
         botonAgregar.style.width = "100%";
         botonAgregar.addEventListener("click", (e) => {
           e.preventDefault();
-          // aumentamos el contador
-          clickAlbum = clickAlbum + 1;
-          
+
           // agregamos al localStorage
           carrito.push(album);
           localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -134,9 +127,11 @@ export const searchAlbums = (artist) => {
           carrito.forEach(album => {
             total=total+album.collectionPrice
           });;
+
+          total=Math.abs(total).toFixed(2) 
           console.log(total,cantidad);
           cont.innerHTML='('+cantidad+')';
-          precio.innerText=`Precio: $${Math.abs(total).toFixed(2)}`
+          precio.innerText=`Precio: $${total}`
 
           // enviamos una notificación
           notificarSuccess(album.collectionName)
@@ -150,8 +145,6 @@ export const searchAlbums = (artist) => {
 
           botonEliminar.addEventListener("click", (e) => {
             e.preventDefault();
-
-            clickAlbum = clickAlbum - 1;
             
             // Buscamos el índice del álbum en el carrito
             const index = carrito.findIndex(
@@ -191,7 +184,9 @@ export const searchAlbums = (artist) => {
               notificarRemove(nombreAlbum)
             }
           });
-          if(clickAlbum == 1 && !tieneEliminar) {
+
+          let repeticiones = contarRepeticiones(carrito,album)
+          if(repeticiones == 1) {
             card.appendChild(botonEliminar);
           }
           
@@ -237,32 +232,25 @@ export const searchAlbums = (artist) => {
              // Eliminamos el álbum
              carrito.splice(index, 1);
 
-             let nombreAlbum = album.collectionName;
-
-             if (album.collectionName.length > 30) {
-               nombreAlbum = album.collectionName.substring(0, 30) + "...";
-             }
-
              // Actualizamos LocalStorage
              localStorage.setItem("carrito", JSON.stringify(carrito));
 
              cantidad = carrito.length;
              total=total-album.collectionPrice
+             total=Math.abs(total).toFixed(2) 
              console.log(total,cantidad);
 
-             precio.innerText=`Precio: $${Math.abs(total).toFixed(2)}`
+             precio.innerText=`Precio: $${total}`
              cont.innerHTML='('+cantidad+')';
 
-             let repeticiones = contarRepeticiones(carrito,album);
-             console.log(repeticiones);
+             var repeticiones = contarRepeticiones(carrito,album);
+             console.log("repeticiones: "+ repeticiones);
    
              if (repeticiones == 0) {
                card.removeChild(botonEliminar);
-               tieneEliminar= false;
              }
        }})
          card.appendChild(botonEliminar);
-         tieneEliminar = true;
        }
       });
     })
