@@ -1,6 +1,12 @@
 
 const botonRegistro = document.getElementById("registro");
 
+let usuarios = []
+
+let usuariosLocales = localStorage.getItem('usuarios');
+if (usuariosLocales != null) {
+    usuarios = JSON.parse(usuariosLocales)}
+
 botonRegistro.addEventListener('click', (e) => {
     e.preventDefault();
     let email = document.getElementById('email').value
@@ -17,11 +23,15 @@ botonRegistro.addEventListener('click', (e) => {
             if (contraseña.length < 8) {
                 notifContraseñaCorta()
             } else {
+
                 let usuario = {
                     email: email,
                     contraseña: contraseña
                 }
-                localStorage.setItem('usuario', JSON.stringify(usuario))
+
+                usuarios.push(usuario)
+                localStorage.setItem('usuarios', JSON.stringify(usuarios))
+
                 notifRegistro()
             }
         }
@@ -67,11 +77,23 @@ const notifContraseñaCorta = () => {
 }
 
 const notifRegistro = () => {
+    let timerInterval;
     Swal.fire({
-        icon: 'success',
-        title: 'Cuenta creada satisfactoriamente!',
-        text: `Volveremos a la pantalla de inicio de sesión.`,
-        showConfirmButton: false,
-        timer: 2000 // Duración en milisegundos
+        title: "Cuenta creada!",
+        html: "Volveremos a la página de login en <b></b> segundos.",
+        timer: 4000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+                timer.textContent = `${Math.ceil(Swal.getTimerLeft()/1000)}`;
+            }, 100);
+        },
+        willClose: () => {
+            clearInterval(timerInterval);
+        }
+    }).then((result) => {
+        window.location.href = '../login.html';
     });
 }
