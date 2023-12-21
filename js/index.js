@@ -3,6 +3,18 @@ import { searchAlbums } from "./albums.js";
 // busqueda inicial de la página
 searchAlbums("albums");
 
+const estadoSesion = document.getElementById("estadoSesion");
+
+let inicioSesion = localStorage.getItem("inicioSesion")
+
+if (inicioSesion === "true"){
+  estadoSesion.style.color = "#44c49e"
+  estadoSesion.innerText = "Sesion Iniciada"
+} else {
+    estadoSesion.style.color = "#d34146"
+    estadoSesion.innerText = "Sesion no Iniciada"     
+}
+
 const busquedaInput = document.getElementById('busquedaInput');
 const buscarButton = document.getElementById('buscarButton');
 
