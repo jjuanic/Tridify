@@ -11,6 +11,8 @@ function contarRepeticiones(array, elemento) {
   }
 
 
+
+let botonPagar = document.getElementById("botonPagar");
 let carrito = JSON.parse(localStorage.getItem('carrito'));
 let cantidad = carrito.length
 
@@ -237,3 +239,46 @@ limpiarCarrito.addEventListener('click',(e)=> {
                Swal.fire("No se ha eliminado el carrito", "", "info");
              }
            })});
+
+botonPagar.addEventListener('click', (e)=>{
+    let inicioSesion = localStorage.getItem('inicioSesion')
+    console.log(inicioSesion);
+
+    if (inicioSesion === "true"){
+        notifRedireccion()
+    } else {
+        notifSesionNoIniciada()
+    }
+})
+
+const notifRedireccion = () => {
+    let timerInterval;
+    Swal.fire({
+        title: "Pago a realizar!",
+        html: "Lo llevaremos a la página del servicio de pago en <b></b> segundos.",
+        timer: 4000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+                timer.textContent = `${Math.ceil(Swal.getTimerLeft()/1000)}`;
+            }, 100);
+        },
+        willClose: () => {
+            clearInterval(timerInterval);
+        }
+    }).then((result) => {
+        window.location.href = '../pago.html';
+    });
+}
+
+const notifSesionNoIniciada = () => {
+    Swal.fire({
+        icon: 'error',
+        title: 'No inició sesión!',
+        text: `Porfavor, ingrese con su cuenta registrada`,
+        showConfirmButton: false,
+        timer: 2000 // Duración en milisegundos
+    })
+}

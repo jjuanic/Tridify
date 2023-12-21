@@ -27,8 +27,7 @@ botonLogin.addEventListener('click', (e) => {
     let usuario = usuariosLocal.find(user => user.email == emailForm && user.contraseña == contraseñaForm);
 
     if (usuario) {
-        let inicioSesion = true;
-        localStorage.setItem('inicioSesion', inicioSesion);
+        localStorage.setItem('inicioSesion', true);
         notificarInicioSesion(emailForm);
     } else {
         notificarError();
