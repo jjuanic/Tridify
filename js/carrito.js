@@ -277,6 +277,7 @@ botonPagar.addEventListener('click', (e)=>{
 const notifRedireccion = () => {
     let timerInterval;
     Swal.fire({
+        icon: 'success',
         title: "Pago a realizar!",
         html: "Lo llevaremos a la página del servicio de pago en <b></b> segundos.",
         timer: 4000,
