@@ -33,7 +33,6 @@ botonCerrarSesion.addEventListener('click', (e) => {
     e.preventDefault();
     localStorage.setItem("inicioSesion", false);
     notificarCierreSesion();
-    location.reload()
 
 });
 
@@ -58,13 +57,6 @@ botonLogin.addEventListener('click', (e) => {
 });
 
 const notificarInicioSesion = (email) => {
-    Swal.fire({
-        icon: 'success',
-
-        text: ``,
-        showConfirmButton: false,
-        timer: 3000 // Duración en milisegundos
-    })
     let timerInterval;
     Swal.fire({
         icon: 'success',
@@ -93,18 +85,33 @@ const notificarError = () => {
         title: 'Datos invalidos!',
         text: `Cuenta no encontrada o datos ingresados incorrectamente.`,
         showConfirmButton: false,
-        timer: 3000 // Duración en milisegundos
+        timer: 1800 // Duración en milisegundos
+        
     })
 }
 
 const notificarCierreSesion = () => {
+    let timerInterval;
     Swal.fire({
         icon: 'success',
-        title: 'Sesion cerrada correctamente',
-        text: `Vuelva pronto!`,
+        title: 'Sesion cerrada correctamente!',
+        html: `Vuelva pronto.`,
+        timer: 1000,
+        timerProgressBar: false,
         showConfirmButton: false,
-        timer: 3000 // Duración en milisegundos
-    })
+        didOpen: () => {
+            // Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+                timer.textContent = `${Math.ceil(Swal.getTimerLeft() / 1000)}`;
+            }, 100);
+        },
+        willClose: () => {
+            clearInterval(timerInterval);
+        }
+    }).then((result) => {
+        location.reload();
+    });
 }
 
 const antesArroba = (cadena) => {

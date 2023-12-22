@@ -2,7 +2,7 @@ const busquedaInput = document.getElementById('busquedaInput');
 const buscarButton = document.getElementById('buscarButton');
 
 buscarButton.addEventListener('click', (e) => {
-e.preventDefault(); 
+e.preventDefault();
 const busqueda = busquedaInput.value; 
 localStorage.setItem("busqueda", busqueda);
 window.location.href = '../busqueda.html';
@@ -37,7 +37,8 @@ botonRegistro.addEventListener('click', (e) => {
     let emailValido = correoValido(email)
 
     if (email == '' || contraseña == '') {
-        notifDatosObligatorios()
+        notifDatosObligatorios();
+          
     } else {
         if (!emailValido) {
             notifEmailInvalido()

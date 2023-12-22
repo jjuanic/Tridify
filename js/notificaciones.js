@@ -81,7 +81,6 @@ export const notificarRemove = (nombreAlbum) =>{
 
   // agregar a el div de notificaciones
   notificaciones.appendChild(alertDiv);
-
     Swal.fire({
       icon: 'success',
       title: 'Álbum eliminado',
@@ -132,7 +131,10 @@ limpiarCarrito.addEventListener('click',(e)=> {
               Swal.fire("Carrito limpio!", "", "success");
               // limpiar carrito
               localStorage.removeItem('carrito');
-              location.reload();
+              setTimeout(function() {
+                location.reload();
+              }, 2000);
+              
             } else if (result.isDenied) {
               Swal.fire("No se ha eliminado el carrito", "", "info");
             }

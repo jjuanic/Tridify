@@ -237,6 +237,7 @@ export const searchAlbums = (artist) => {
 
              precio.innerText=`Precio: $${total}`
              cont.innerHTML='('+cantidad+')';
+             notificarRemove(nombreAlbum)
 
              var repeticiones = contarRepeticiones(carrito,album);
    
