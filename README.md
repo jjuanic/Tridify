@@ -10,5 +10,5 @@ El deploy en github-pages (https://jjuanic.github.io/Tridify/index.html) no func
 
 Debido a esto, realicé el deploy en una plataforma Netlify de una manera bastante sencilla y funcional
 
-deploy: https://classy-cassata-ff3b84.netlify.app/index.html
+deploy: https://tridify.netlify.app/
 
