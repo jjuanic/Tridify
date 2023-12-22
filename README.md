@@ -10,5 +10,6 @@ Todo está trabajado con LocalStorage pues es una página realizada a modo de pr
 El deploy en github-pages (https://jjuanic.github.io/Tridify/index.html) no funcionaba correctamente debido al funcionamiento del mismo y su incompatibilidad con location.href (js)
 
 Debido a esto, realicé el deploy en una plataforma Netlify de una manera bastante sencilla y funcional
+
 deploy: https://classy-cassata-ff3b84.netlify.app/index.html
 
