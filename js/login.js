@@ -5,7 +5,7 @@ buscarButton.addEventListener('click', (e) => {
 e.preventDefault(); 
 const busqueda = busquedaInput.value; 
 localStorage.setItem("busqueda", busqueda);
-window.location.href = '../busqueda.html';
+location.href = '../busqueda.html';
 });
 
 const estadoSesion = document.getElementById("estadoSesion");
@@ -26,7 +26,7 @@ const botonCerrarSesion = document.getElementById("cerrarSesion");
 
 botonRegistro.addEventListener('click', (e) => {
     e.preventDefault();
-    window.location.href = '../registro.html';
+    location.href = '../registro.html';
 });
 
 botonCerrarSesion.addEventListener('click', (e) => {
