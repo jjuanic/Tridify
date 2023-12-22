@@ -1,5 +1,4 @@
 # Tridify
-https://github.com/jjuanic/Tridify/blob/master/README.md
 Página web donde podemos realizar consultas de álbumes consumiendo la API de ITunes Search.
 
 Tenemos un sistema de registros y logueo, busqueda de álbumes, consulta de los mismos y un carrito
