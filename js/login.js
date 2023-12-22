@@ -26,7 +26,7 @@ const botonCerrarSesion = document.getElementById("cerrarSesion");
 
 botonRegistro.addEventListener('click', (e) => {
     e.preventDefault();
-    window.location.href = './../registro.html';
+    window.location.href = '/Tridify/registro.html';
 });
 
 botonCerrarSesion.addEventListener('click', (e) => {
