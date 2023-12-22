@@ -30,6 +30,13 @@
   padding: 10px; 
 }
 
+.carrito {
+  max-height: 200px; /* Altura máxima del historial */
+  overflow-y: scroll; 
+  border: 1px solid #ccc; 
+  padding: 10px; 
+}
+
 .less-width {
   max-width: 100%; 
 }
