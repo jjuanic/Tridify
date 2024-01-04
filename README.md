@@ -6,7 +6,7 @@ Tenemos un sistema de registros e inicio de sesion, busqueda de álbumes, consul
 Todo está trabajado con LocalStorage pues es una página realizada a modo de proyecto final para la primer parte del curso de Full Stack Developer de Franja Morada (donde solo trabajamos con Front-End)
 
 ### Deploy
-El deploy en github-pages [https://jjuanic.github.io/Tridify] no funcionaba correctamente debido al funcionamiento interno del mismo y su incompatibilidad con location.href (js)
+El deploy en github-pages no funcionaba correctamente debido al funcionamiento interno del mismo y su incompatibilidad con location.href (js)
 
 Debido a esto, realicé el deploy en una plataforma Netlify de una manera bastante sencilla y funcional
 
